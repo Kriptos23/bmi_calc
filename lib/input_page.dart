@@ -27,31 +27,27 @@ class _InputPageState extends State<InputPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                      child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        // currentContainerMale = activeContainer;
-                        // currentContainerFemale = passiveContainer;
-                        // updateContainerColorGender(maleOrFemale.male);
-                        gender = (gender == MaleOrFemale.male) ? gender = null : MaleOrFemale.male;
-                      });
-                    },
-                    child: Containers(
+                      child: buildGestureDetector(Containers(
                         // color: Color(currentContainerMale),
-                        color: (gender == MaleOrFemale.male) ? Colors.blue : passiveContainer,
-                        ContChild: IconWidget(
-                            iconG: FontAwesomeIcons.mars, gender: "MALE")),
-                  )),
+                          color: (gender == MaleOrFemale.male)
+                              ? Colors.blue
+                              : passiveContainer,
+                          ContChild: IconWidget(
+                              iconG: FontAwesomeIcons.mars, gender: "MALE")))),
                   Expanded(
                       child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        gender = (gender == MaleOrFemale.female) ? gender = null : MaleOrFemale.female;
+                        gender = (gender == MaleOrFemale.female)
+                            ? gender = null
+                            : MaleOrFemale.female;
                       });
                     },
                     child: Containers(
                         // color: Color(currentContainerFemale),
-                        color: (gender == MaleOrFemale.female) ? Colors.pink : passiveContainer,
+                        color: (gender == MaleOrFemale.female)
+                            ? Colors.pink
+                            : passiveContainer,
                         ContChild: IconWidget(
                             iconG: FontAwesomeIcons.venus, gender: "FEMALE")),
                   ))
@@ -82,6 +78,22 @@ class _InputPageState extends State<InputPage> {
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  GestureDetector buildGestureDetector(Widget child) {
+    return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      // currentContainerMale = activeContainer;
+                      // currentContainerFemale = passiveContainer;
+                      // updateContainerColorGender(maleOrFemale.male);
+                      gender = (gender == MaleOrFemale.male)
+                          ? gender = null
+                          : MaleOrFemale.male;
+                    });
+                  },
+                  child: child,
+                );
   }
 }
 
@@ -129,3 +141,4 @@ MaleOrFemale? gender;
 //         : (femaleContainerColor = passiveContainer));
 //   }
 // }
+
