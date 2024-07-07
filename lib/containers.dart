@@ -6,16 +6,22 @@ class Containers extends StatelessWidget {
   //
   final Widget? ContChild;
   final Color color;
-
-  Containers({required this.color, this.ContChild});
+  void Function()? OnPress;
+// final Function OnPress;
+  Containers({required this.color, this.ContChild, this
+      .OnPress});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: ContChild,
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
-        // width: width1?.toDouble(), height: height1?.toDouble()
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.circular(15)));
+    return GestureDetector(
+      onTap: OnPress,
+      child: Container(
+          child: ContChild,
+          margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+          // width: width1?.toDouble(), height: height1?.toDouble()
+          decoration: BoxDecoration(
+              color: color, borderRadius: BorderRadius.circular(15))),
+    );
   }
 }
+
