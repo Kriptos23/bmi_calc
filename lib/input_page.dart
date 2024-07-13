@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'containers.dart';
 import 'icon_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'constants.dart';
 import 'main.dart';
+
+Color maleContainerColor = kPassiveContainer;
+Color femaleContainerColor = kPassiveContainer;
+MaleOrFemale? gender;
+
+enum MaleOrFemale { male, female }
 
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
-
-double sliderValue = 1;
 
 class _InputPageState extends State<InputPage> {
   @override
@@ -33,7 +38,7 @@ class _InputPageState extends State<InputPage> {
                       // color: Color(currentContainerMale),
                       color: (gender == MaleOrFemale.male)
                           ? Colors.blue
-                          : passiveContainer,
+                          : kPassiveContainer,
                       ContChild: IconWidget(
                         iconG: FontAwesomeIcons.mars,
                         gender: "MALE",
@@ -52,7 +57,7 @@ class _InputPageState extends State<InputPage> {
                       // color: Color(currentContainerFemale),
                       color: (gender == MaleOrFemale.female)
                           ? Colors.pink
-                          : passiveContainer,
+                          : kPassiveContainer,
                       ContChild: IconWidget(
                           iconG: FontAwesomeIcons.venus, gender: "FEMALE"),
                       OnPress: () {
@@ -71,64 +76,98 @@ class _InputPageState extends State<InputPage> {
             SizedBox(height: 15),
             Expanded(
                 child: Row(
-                  children: [
-                    Expanded(
-                        child: Containers(
-                          color: activeContainer,
-                          OnPress: () {},
-                          ContChild: Row(children: [
-                              Slider(thumbColor: Colors.red, activeColor:
-                              Colors.green, inactiveColor: Colors.blue,
-                                 secondaryTrackValue: sliderValue,
-                                  value:
-                              sliderValue, max:
-                              230,
-                                  onChanged:
-                                  (double value){
-                                setState(() {
-                                  sliderValue = value;
-                                });
-                                }), Text('cm')
-                              ]),
-                        ))
-                  ],
-                )),
+              children: [
+                Expanded(
+                    child: Containers(
+                  color: kActiveContainer,
+                  OnPress: () {},
+                  ContChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      // crossAxisAlignment: CrossAxisAlignment.baseline,
+                      // textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                          child: Text(
+                            "HEIGHT",
+                            style: kTextGender,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.ideographic,
+                          children: [
+                            Text(
+                              '${kSliderValue.round()}',
+                              style: kNumberStyle,
+                            ),
+                            Text('cm', style: kNumberStyle.copyWith(fontSize:
+                            20))
+                          ],
+                        ),
+                        Expanded(
+                          child: SliderTheme(data: SliderThemeData
+                            (overlayShape: RoundSliderOverlayShape
+                            (overlayRadius: 30), thumbColor: (gender ==
+                              MaleOrFemale.male) ? Colors.blue : Colors.pink,
+                              activeTrackColor: (gender ==
+                                  MaleOrFemale.male) ? Colors.blue : Colors.pink),
+                            child: Slider(
+                                // thumbColor: Colors.red,
+                                // activeColor: Color(0xFFE83D66),
+                                inactiveColor: Colors.white70,
+                                secondaryTrackValue: kSliderValue,
+                                value: kSliderValue,
+                                max: 230,
+                                onChanged: (double value) {
+                                  setState(() {
+                                    kSliderValue = value;
+                                  });
+                                }),
+                          ),
+                        ),
+                      ]),
+                ))
+              ],
+            )),
             SizedBox(height: 15),
             Expanded(
                 child: Row(children: [
-                  Expanded(
-                      child: Containers(
-                          color: activeContainer, OnPress: () {})),
-                  Expanded(
-                      child: Containers(color: activeContainer, OnPress: () {}))
-                ])),
+              Expanded(
+                  child: Containers(color: kActiveContainer,
+                      ContChild: Column(
+                        children: [
+                          Text("WEIGHT", style: kTextGender,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("$weight", style: kNumberStyle), Text('cm',
+                                style: kNumberStyle.copyWith(fontSize: 20))
+                          ],
+                        ),
+                        Row(children: []),
+                        ],
+                      ))),
+              Expanded(
+                  child: Containers(color: kActiveContainer, OnPress: () {}))
+            ])),
             Container(
                 width: double.infinity,
                 height: 90,
-                color: Color(0xFFEB1555),
+                color: Color(kLowerContainer),
                 margin: EdgeInsets.only(top: 15))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
-
-const activeContainer = Color(0xFF34263B);
-const passiveContainer = Color(0xFF26263B);
 // int currentContainerMale = passiveContainer;
 // int currentContainerFemale = passiveContainer;
 
-Color maleContainerColor = passiveContainer;
-Color femaleContainerColor = passiveContainer;
-
-enum MaleOrFemale { male, female }
-
-MaleOrFemale? gender;
 // void updateContainerColorGender(maleOrFemale a) {
 //   if (a == maleOrFemale.male) {
 //     // if(maleContainerColor == passiveContainer){

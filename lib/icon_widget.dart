@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'icon_widget.dart';
-
-const TextStyle textGender = TextStyle(fontSize: 20, color: Colors.white70);
+import 'constants.dart';
 
 class IconWidget extends StatelessWidget {
   final IconData iconG;
@@ -13,7 +11,7 @@ class IconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       Icon(iconG, color: Colors.white70, size: 90),
-      Text(gender, style: textGender)
+      Text(gender, style: kTextGender)
     ]);
   }
 }
