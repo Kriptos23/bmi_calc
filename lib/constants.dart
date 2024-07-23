@@ -13,5 +13,7 @@ double kSliderValue = 1;
 
 int weight = 0;
 
+int age = 0;
+
 TextStyle kNumberStyle = TextStyle(fontSize: 50, color: Colors.white70,
     fontWeight: FontWeight.w500);

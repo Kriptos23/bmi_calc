@@ -102,17 +102,21 @@ class _InputPageState extends State<InputPage> {
                               '${kSliderValue.round()}',
                               style: kNumberStyle,
                             ),
-                            Text('cm', style: kNumberStyle.copyWith(fontSize:
-                            20))
+                            Text('cm',
+                                style: kNumberStyle.copyWith(fontSize: 20))
                           ],
                         ),
                         Expanded(
-                          child: SliderTheme(data: SliderThemeData
-                            (overlayShape: RoundSliderOverlayShape
-                            (overlayRadius: 30), thumbColor: (gender ==
-                              MaleOrFemale.male) ? Colors.blue : Colors.pink,
-                              activeTrackColor: (gender ==
-                                  MaleOrFemale.male) ? Colors.blue : Colors.pink),
+                          child: SliderTheme(
+                            data: SliderThemeData(
+                                overlayShape:
+                                    RoundSliderOverlayShape(overlayRadius: 30),
+                                thumbColor: (gender == MaleOrFemale.male)
+                                    ? Colors.blue
+                                    : Colors.pink,
+                                activeTrackColor: (gender == MaleOrFemale.male)
+                                    ? Colors.blue
+                                    : Colors.pink),
                             child: Slider(
                                 // thumbColor: Colors.red,
                                 // activeColor: Color(0xFFE83D66),
@@ -135,24 +139,87 @@ class _InputPageState extends State<InputPage> {
             Expanded(
                 child: Row(children: [
               Expanded(
-                  child: Containers(color: kActiveContainer,
-                      ContChild: Column(
-                        children: [
-                          Text("WEIGHT", style: kTextGender,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("$weight", style: kNumberStyle), Text('cm',
-                                style: kNumberStyle.copyWith(fontSize: 20))
-                          ],
-                        ),
-                        Row(children: []),
-                        ],
-                      ))),
+                  child: Containers(
+                color: kActiveContainer,
+                ContChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "WEIGHT",
+                      style: kTextGender,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("$weight", style: kNumberStyle),
+                        Text(" kg", style: kNumberStyle.copyWith(fontSize: 20)),
+                      ],
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      roundIcon(
+                          iconG: FontAwesomeIcons.plus,
+                          onTap: () {
+                            setState(() {
+                              (weight <= 362) ? weight++ : null;
+                            });
+                          }),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      roundIcon(
+                          iconG: FontAwesomeIcons.minus,
+                          onTap: () {
+                            setState(() {
+                              (weight > 0) ? weight-- : null;
+                            });
+                          }),
+                    ]),
+                  ],
+                ),
+              )),
               Expanded(
-                  child: Containers(color: kActiveContainer, OnPress: () {}))
+                  child: Containers(
+                      color: kActiveContainer,
+                      ContChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "AGE",
+                            style: kTextGender,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("$age", style: kNumberStyle),
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                roundIcon(
+                                    iconG: FontAwesomeIcons.plus,
+                                    onTap: () {
+                                      setState(() {
+                                        (age <= 362) ? age++ : null;
+                                      });
+                                    }),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                roundIcon(
+                                    iconG: FontAwesomeIcons.minus,
+                                    onTap: () {
+                                      setState(() {
+                                        (age > 0) ? age-- : null;
+                                      });
+                                    }),
+                              ]),
+                        ],
+                      )))
             ])),
             Container(
                 width: double.infinity,
@@ -165,6 +232,25 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
+
+class roundIcon extends StatelessWidget {
+  final IconData? iconG;
+
+  final void Function()? onTap;
+
+  roundIcon({this.iconG, this.onTap});
+
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: onTap,
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      constraints: BoxConstraints(minHeight: 50, minWidth: 50),
+      child: Icon(iconG, color: Colors.white70),
+    );
+  }
+}
+
 // int currentContainerMale = passiveContainer;
 // int currentContainerFemale = passiveContainer;
 
