@@ -3,7 +3,7 @@ import 'containers.dart';
 import 'icon_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
-import 'main.dart';
+import 'results.dart';
 
 Color maleContainerColor = kPassiveContainer;
 Color femaleContainerColor = kPassiveContainer;
@@ -221,11 +221,17 @@ class _InputPageState extends State<InputPage> {
                         ],
                       )))
             ])),
-            Container(
-                width: double.infinity,
-                height: 90,
-                color: Color(kLowerContainer),
-                margin: EdgeInsets.only(top: 15))
+            GestureDetector(
+              child: Container(
+                  width: double.infinity,
+                  height: 90,
+                  color: Color(kLowerContainer),
+                  margin: EdgeInsets.only(top: 15),),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)
+                =>Results()));
+              },
+            )
           ],
         ),
       ),
@@ -233,23 +239,7 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class roundIcon extends StatelessWidget {
-  final IconData? iconG;
 
-  final void Function()? onTap;
-
-  roundIcon({this.iconG, this.onTap});
-
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: onTap,
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-      constraints: BoxConstraints(minHeight: 50, minWidth: 50),
-      child: Icon(iconG, color: Colors.white70),
-    );
-  }
-}
 
 // int currentContainerMale = passiveContainer;
 // int currentContainerFemale = passiveContainer;
