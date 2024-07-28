@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../components/constants.dart';
 import '../components/round_icon.dart';
 import '../components/bottom_button.dart';
+import 'package:bmi_calc/calc_brain.dart';
 
 Color maleContainerColor = kPassiveContainer;
 Color femaleContainerColor = kPassiveContainer;
@@ -226,9 +227,14 @@ class _InputPageState extends State<InputPage> {
             bottomButton(
               text: 'Calculate',
               nextScreen: () {
+                CalculatorBrain calc = CalculatorBrain(weight: weight,
+                    height: kSliderValue);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Results()));
-                ibm = calculate();
+                    MaterialPageRoute(builder: (context) => Results(bmi: calc
+                        .getBMI(), commentary: calc.getCommentary(), normal:
+                    calc.getNormal(), range:
+                    calc.getRange())));
+                // ibm = calculate();
               },
             )
           ],
@@ -238,16 +244,16 @@ class _InputPageState extends State<InputPage> {
   }
 
 
-  double calculate() {
-    double ibm = 0;
-    setState(() {
-      ibm = ((weight / (kSliderValue * kSliderValue)) * 10000);
-    });
-    return ibm;
-  }
+  // double calculate() {
+  //   double ibm = 0;
+  //   setState(() {
+  //     ibm = ((weight / (kSliderValue * kSliderValue)) * 10000);
+  //   });
+  //   return ibm;
+  // }
 }
 
- double ibm = 0;
+ // double ibm = 0;
 
 
 // int currentContainerMale = passiveContainer;

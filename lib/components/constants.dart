@@ -13,7 +13,7 @@ int kLowerContainer = 0xFFEB1555;
 double kSliderValue = 1;
 
 
-int weight = 45;
+double weight = 45;
 
 int age = 18;
 

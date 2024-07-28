@@ -1,11 +1,16 @@
 import 'package:bmi_calc/components/bottom_button.dart';
 import 'package:bmi_calc/components/constants.dart';
 import 'package:flutter/material.dart';
-import 'input_page.dart';
 import '../components/containers.dart';
 
 class Results extends StatelessWidget {
-  String ibm2 = ibm.toStringAsFixed(1);
+  // String ibm2 = ibm.toStringAsFixed(1);
+  final String bmi;
+  final String normal;
+  final String range;
+  final String commentary;
+  Results({required this.bmi, required this.commentary, required this.normal,
+    required this.range});
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +43,20 @@ class Results extends StatelessWidget {
                 ContChild: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text('Normal',
+                    Text('$normal',
                         style: kNumberStyle.copyWith(color: Colors.green,
                             fontSize: 30)),
-                    Text("$ibm2", style: kNumberStyle.copyWith(fontSize: 90)),
+                    Text("$bmi", style: kNumberStyle.copyWith(fontSize: 90)),
                     SizedBox(
                       width: double.infinity,
                     ),
-                    Text('Normal BMI range: ', style: kNumberStyle.copyWith
+                    Text('$normal BMI range: ', style: kNumberStyle.copyWith
                       (color: Colors.white70,
                         fontSize: 15)),
-                    Text('something', style: kNumberStyle.copyWith(color:
+                    Text('$range', style: kNumberStyle.copyWith(color:
                     Colors.white,
                         fontSize: 15)),
-                    Text('You have a normal body weight.\n Good job!', style:
+                    Text('$commentary', style:
                     kNumberStyle.copyWith(color: Colors.white,
                         fontSize: 15), textAlign: TextAlign.center,),
                     // OutlinedButton(
@@ -80,3 +85,4 @@ class Results extends StatelessWidget {
     );
   }
 }
+
