@@ -1,9 +1,11 @@
+import 'package:bmi_calc/screens/results.dart';
 import 'package:flutter/material.dart';
-import 'containers.dart';
-import 'icon_widget.dart';
+import '../components/containers.dart';
+import '../components/icon_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'constants.dart';
-import 'results.dart';
+import '../components/constants.dart';
+import '../components/round_icon.dart';
+import '../components/bottom_button.dart';
 
 Color maleContainerColor = kPassiveContainer;
 Color femaleContainerColor = kPassiveContainer;
@@ -204,7 +206,7 @@ class _InputPageState extends State<InputPage> {
                                     iconG: FontAwesomeIcons.plus,
                                     onTap: () {
                                       setState(() {
-                                        (age <= 362) ? age++ : null;
+                                        (age <= 111) ? age++ : null;
                                       });
                                     }),
                                 SizedBox(
@@ -221,15 +223,12 @@ class _InputPageState extends State<InputPage> {
                         ],
                       )))
             ])),
-            GestureDetector(
-              child: Container(
-                  width: double.infinity,
-                  height: 90,
-                  color: Color(kLowerContainer),
-                  margin: EdgeInsets.only(top: 15),),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)
-                =>Results()));
+            bottomButton(
+              text: 'Calculate',
+              nextScreen: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Results()));
+                ibm = calculate();
               },
             )
           ],
@@ -237,8 +236,18 @@ class _InputPageState extends State<InputPage> {
       ),
     );
   }
+
+
+  double calculate() {
+    double ibm = 0;
+    setState(() {
+      ibm = ((weight / (kSliderValue * kSliderValue)) * 10000);
+    });
+    return ibm;
+  }
 }
 
+ double ibm = 0;
 
 
 // int currentContainerMale = passiveContainer;
